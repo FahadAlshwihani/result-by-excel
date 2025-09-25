@@ -1,38 +1,990 @@
-.App {
-  text-align: center;
+/* Enhanced Modern UI/UX with RTL Support and Custom Animated Background */
+
+/* Import Google Fonts */
+/* Import Google Fonts - Add Tajawal for Arabic/RTL support */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;600;700;800&display=swap');
+
+/* CSS Variables for Color Palette */
+:root {
+  /* Updated Background Gradient to Match Request */
+  --bg-gradient: linear-gradient(270deg, #1e0735, #361047, #0d025f, #33182f);
+  --bg-gradient-animated: var(--bg-gradient); /* For animation */
+  
+  /* Text Colors */
+  --text-primary: #F8FAFC;
+  --text-secondary: #94A3B8;
+  --text-muted: #64748B;
+  
+  /* Primary Colors */
+  --color-primary: #14B8A6;
+  --color-primary-hover: #0D9488;
+  --color-primary-light: rgba(20, 184, 166, 0.1);
+  
+  /* Secondary Colors */
+  --color-secondary: #6366F1;
+  --color-secondary-hover: #4F46E5;
+  --color-secondary-light: rgba(99, 102, 241, 0.1);
+  
+  /* Status Colors */
+  --color-success: #22C55E;
+  --color-error: #EF4444;
+  --color-warning: #F59E0B;
+  
+  /* Card & Surface Colors */
+  --card-bg: rgba(30, 41, 59, 0.8);
+  --card-border: rgba(148, 163, 184, 0.1);
+  --glass-bg: rgba(15, 23, 42, 0.6);
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-glow-primary: 0 0 20px rgba(20, 184, 166, 0.3);
+  --shadow-glow-secondary: 0 0 20px rgba(99, 102, 241, 0.3);
 }
 
-.App-logo {
-  height: 40vmin;
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Tajawal', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif; /* Tajawal primary for Arabic */
+  background: var(--bg-gradient-animated);
+  background-size: 600% 600%;
+  animation: gradientAnimation 20s ease infinite;
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* RTL Support - Global RTL direction */
+  direction: rtl;
+  text-align: right; /* Default alignment for RTL */
+}
+
+
+/* Custom Keyframes for the Requested Background Animation */
+@keyframes gradientAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Animated Background Elements (Floating Orbs - Adjusted for New BG Colors) */
+.background-effects {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.floating-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(50px); /* Softer blur */
+  animation: float 20s ease-in-out infinite;
+}
+
+.orb-1 {
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(14, 165, 233, 0.15) 0%, transparent 70%); /* Matches new blue */
+  top: -150px;
+  right: -150px;
+  animation-delay: 0s;
+}
+
+.orb-2 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.12) 0%, transparent 70%); /* Matches indigo */
+  bottom: -200px;
+  left: -200px;
+  animation-delay: -7s;
+}
+
+.orb-3 {
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, rgba(20, 184, 166, 0.1) 0%, transparent 70%); /* Matches teal */
+  top: 30%;
+  left: 10%;
+  animation-delay: -14s;
+}
+
+@keyframes float {
+  0%, 100% { 
+    transform: translateY(0px) translateX(0px) rotate(0deg); 
+  }
+  25% { 
+    transform: translateY(-20px) translateX(-10px) rotate(90deg);
+  }
+  50% { 
+    transform: translateY(-10px) translateX(10px) rotate(180deg);
+  }
+  75% { 
+    transform: translateY(-30px) translateX(-5px) rotate(270deg);
   }
 }
 
-.App-header {
-  background-color: #282c34;
+/* Main App Container - Centered with RTL Support */
+.App {
   min-height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centers horizontally in RTL */
+  padding: 2rem 1rem;
+  flex-direction: column; /* Ensures vertical stacking if needed */
+}
+
+/* Centering Container Utility */
+.container {
+  width: 100%;
+  max-width: 1200px; /* Increased for better organization */
+  margin: 0 auto; /* Centers in RTL */
+  padding: 0 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* Glass Card Effect - Centered and Organized */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--card-border);
+  border-radius: 24px;
+  box-shadow: var(--shadow-sm); /* Smaller shadow */
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  width: 100%; /* Full width within container for centering */
+  max-width: 800px; /* Ensures organization */
+  margin: 0 auto; /* Centers the card */
+  text-align: center; /* Default centering for RTL text */
+}
+
+.glass-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(148, 163, 184, 0.3), transparent);
+}
+
+/* Typography - RTL Optimized */
+.title-primary {
+  font-family: 'Tajawal', sans-serif; /* Explicit for headings */
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+  text-align: center; /* Ensures centering */
+}
+
+.subtitle {
+  font-family: 'Tajawal', sans-serif; /* Explicit for headings */
+  color: var(--text-secondary);
+  font-size: 1.125rem;
+  font-weight: 500;
+  margin-bottom: 2rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center; /* Centering for subtitles */
+}
+
+/* Enhanced Buttons - RTL with Centering */
+.btn-modern {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center; /* Centers content */
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 16px;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  min-width: 60px; /* For icon-only buttons */
+  text-align: center; /* RTL text centering */
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--color-primary), #0891B2);
+  color: white;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-secondary {
+  background: linear-gradient(135deg, var(--color-secondary), #7C3AED);
+  color: white;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--text-primary);
+  border: 2px solid var(--card-border);
+  backdrop-filter: blur(10px);
+}
+
+/* Enhanced Form Elements - RTL Input Group */
+.form-group {
+  position: relative;
+  margin-bottom: 1.5rem;
+  width: 100%; /* Full width for centering */
+}
+
+.form-input {
+  font-family: 'Tajawal', sans-serif;
+  width: 100%;
+  padding: 1rem 1.5rem;
+  background: rgba(30, 41, 59, 0.6);
+  border: 2px solid var(--card-border);
+  border-radius: 16px;
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+  text-align: right; /* RTL text alignment */
+  direction: rtl; /* Enforce RTL in input */
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 4px rgba(20, 184, 166, 0.1);
+  background: rgba(30, 41, 59, 0.8);
+}
+
+.form-input::placeholder {
+  color: var(--text-muted);
+  font-weight: 400;
+  text-align: right; /* RTL placeholder */
+  direction: rtl;
+}
+
+.input-group {
+  display: flex;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  flex-direction: row-reverse; /* RTL: Button on right, input on left */
+  width: 100%; /* Full width for centering */
+  justify-content: center; /* Centers the group */
+}
+
+.input-group .form-input {
+  border-radius: 0 16px 16px 0; /* RTL border radius */
+  border-left: none; /* No left border in RTL */
+  border-right: 2px solid var(--card-border);
+  flex: 1;
+}
+
+.input-group .btn-modern {
+  border-radius: 16px 0 0 16px; /* RTL border radius */
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+/* Status Cards - Centered and RTL */
+.status-card {
+  padding: 1.5rem;
+  border-radius: 16px;
+  margin-bottom: 1rem;
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-align: center; /* Centering */
+  width: 100%; /* Full width */
+  margin: 0 auto; /* Centers */
+}
+
+.status-success {
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(34, 197, 94, 0.05));
+  border-color: rgba(34, 197, 94, 0.3);
+}
+
+.status-error {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(239, 68, 68, 0.05));
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+.status-warning {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(245, 158, 11, 0.05));
+  border-color: rgba(245, 158, 11, 0.3);
+}
+
+/* Loading Animation - Centered */
+.loading-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: center; /* Centers */
+  gap: 1rem;
+  padding: 3rem;
+  text-align: center; /* RTL centering */
 }
 
-.App-link {
-  color: #61dafb;
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 3px solid var(--card-border);
+  border-top: 3px solid var(--color-primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-text {
+  font-family: 'Tajawal', sans-serif;
+  color: var(--text-secondary);
+  font-weight: 500;
+  font-size: 1.125rem;
+  text-align: center;
+}
+
+/* Result Display - RTL Grid with Centering */
+.result-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem auto; /* Centers the grid */
+  width: 100%;
+  justify-items: center; /* Centers items in RTL */
+}
+
+.result-item {
+  background: var(--glass-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 1.5rem;
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%; /* Full width for organization */
+  text-align: right; /* RTL text */
+  max-width: 300px; /* Limits width for better centering */
+}
+
+.result-label {
+  font-family: 'Tajawal', sans-serif;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; /* RTL: Align to end (right) */
+  gap: 0.5rem; /* Gap for icon-text */
+  direction: rtl;
+}
+
+.result-label svg {
+  margin-right: 0; /* No extra margin in RTL */
+  margin-left: 0.5rem; /* Space after icon in RTL flow */
+}
+
+.result-value {
+  font-family: 'Tajawal', sans-serif;
+  color: var(--text-primary);
+  font-size: 1.25rem;
+  font-weight: 600;
+  text-align: right; /* RTL alignment */
+}
+
+.result-value.success {
+  color: var(--color-success);
+}
+
+.result-value.error {
+  color: var(--color-error);
+}
+
+/* Alert Messages - RTL with Centering */
+.alert {
+  font-family: 'Tajawal', sans-serif;
+  padding: 1.5rem;
+  border-radius: 16px;
+  margin-bottom: 1.5rem;
+  border: 1px solid;
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-direction: row-reverse; /* RTL: Icon on right, text on left */
+  text-align: right; /* RTL text */
+  justify-content: center; /* Centers the alert */
+  width: 100%;
+  margin: 0 auto;
+}
+
+.alert-warning {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(245, 158, 11, 0.05));
+  border-color: rgba(245, 158, 11, 0.3);
+  color: var(--color-warning);
+}
+
+.alert-success {
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(34, 197, 94, 0.05));
+  border-color: rgba(34, 197, 94, 0.3);
+  color: var(--color-success);
+}
+
+.alert-error {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(239, 68, 68, 0.05));
+  border-color: rgba(239, 68, 68, 0.3);
+  color: var(--color-error);
+}
+
+/* Button Groups - RTL Centered */
+.button-group {
+  display: flex;
+  gap: 1rem;
+  justify-content: center; /* Centers buttons */
+  flex-wrap: wrap;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Flex Icon Container Utility - RTL */
+.flex-icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centers */
+  gap: 0.75rem;
+  flex-direction: row-reverse; /* RTL: Icon on right, text on left */
+  direction: rtl;
+}
+
+/* Responsive Design - RTL Optimized */
+@media (max-width: 768px) {
+  .App {
+    padding: 1rem 0.5rem;
   }
+  
+  .glass-card {
+    margin: 0 0.5rem;
+    border-radius: 20px;
+    padding: 2rem 1.5rem;
+  }
+  
+  .btn-modern {
+      font-family: 'Tajawal', sans-serif;
+    padding: 0.875rem 1.5rem;
+    font-size: 0.9rem;
+    min-width: 50px; /* Smaller for mobile */
+  }
+  
+  .form-input {
+    padding: 0.875rem 1.25rem;
+  }
+  
+  .result-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    justify-items: center;
+  }
+  
+  .input-group {
+    flex-direction: column;
+  }
+  
+  .input-group .form-input {
+    border-radius: 16px 16px 0 0;
+    border-left: 2px solid var(--card-border);
+    border-right: 2px solid var(--card-border);
+    border-bottom: none;
+  }
+  
+  .input-group .btn-modern {
+    border-radius: 0 0 16px 16px;
+    border-top: none;
+  }
+  
+  .alert {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
+  }
+  
+  .flex-icon-container {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .result-label {
+    justify-content: center;
+  }
+  
+  .result-label svg {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .title-primary {
+    font-size: 2rem;
+  }
+  
+  .subtitle {
+    font-size: 1rem;
+  }
+  
+  .glass-card {
+    padding: 1.5rem 1rem;
+    border-radius: 16px;
+  }
+  
+  .btn-modern {
+    padding: 0.75rem 1.25rem;
+    font-size: 0.875rem;
+    min-width: 48px;
+  }
+  
+  .result-item {
+    padding: 1.25rem;
+    max-width: 100%;
+  }
+  
+  .status-card {
+    padding: 1.25rem;
+  }
+  
+  .loading-container {
+    padding: 2rem;
+  }
+  
+  .floating-orb {
+    display: none; /* Hide orbs on small screens for performance */
+  }
+  
+  .button-group {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .button-group .btn-modern {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  body {
+    animation: none;
+    background: linear-gradient(270deg, #0ea5e9, #6366f1, #14b8a6, #0f172a); /* Static fallback */
+  }
+  
+  .floating-orb {
+    animation: none;
+  }
+}
+
+/* Focus styles for accessibility */
+.btn-modern:focus,
+.form-input:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --card-border: rgba(148, 163, 184, 0.3);
+    --text-secondary: #CBD5E1;
+  }
+  
+  .glass-card {
+    border-width: 2px;
+  }
+}
+
+/* Print styles */
+@media print {
+  .background-effects,
+  .floating-orb {
+    display: none !important;
+  }
+  
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  
+  .glass-card {
+    background: white !important;
+    color: black !important;
+    box-shadow: none !important;
+    border: 1px solid #ccc !important;
+    backdrop-filter: none !important;
+  }
+  
+  .btn-modern,
+  .loading-container {
+    display: none !important;
+  }
+  
+  .title-primary {
+    color: black !important;
+    -webkit-text-fill-color: black !important;
+    background: none !important;
+  }
+  
+  .result-grid {
+    display: block !important;
+  }
+  
+  .result-item {
+    border: 1px solid #ccc !important;
+    margin-bottom: 1rem !important;
+    page-break-inside: avoid;
+  }
+}
+
+/* Touch-friendly interactions */
+@media (hover: none) and (pointer: coarse) {
+  .btn-modern:active {
+    transform: scale(0.98);
+  }
+  
+  .form-input:active {
+    transform: scale(0.99);
+  }
+}
+
+/* Dark mode preference support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --glass-bg: rgba(15, 23, 42, 0.8);
+    --card-bg: rgba(30, 41, 59, 0.9);
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  :root {
+    --card-border: rgba(148, 163, 184, 0.5);
+    --text-secondary: #E2E8F0;
+    --text-muted: #CBD5E1;
+  }
+  
+  .glass-card {
+    border-width: 2px;
+  }
+  
+  .btn-modern {
+    border: 2px solid currentColor;
+  }
+}
+
+/* Smooth scrolling for all elements */
+* {
+  scroll-behavior: smooth;
+}
+
+/* Enhanced focus indicators for accessibility */
+.btn-modern:focus-visible,
+.form-input:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .floating-orb,
+  .loading-spinner,
+  .glass-card {
+    animation: none;
+  }
+  
+  .btn-modern,
+  .form-input,
+  .result-item,
+  .status-card {
+    transition: none;
+  }
+}
+
+/* Container max-width utilities - Responsive */
+@media (min-width: 640px) {
+  .container {
+    max-width: 640px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px;
+  }
+}
+
+/* Utility classes for button groups */
+.button-group {
+  display: flex;
+  gap: 1rem;
+  justify-content: center; /* Centers buttons */
+  flex-wrap: wrap;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Enhanced glassmorphism effect */
+.glass-card {
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.125);
+}
+
+/* Gradient text utility */
+.gradient-text {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glow effect utility */
+.glow-primary {
+  box-shadow: 0 0 20px rgba(20, 184, 166, 0.3);
+}
+
+.glow-secondary {
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+}
+
+/* Micro-interactions (subtle, no hover transforms) */
+.btn-modern:active {
+  transform: scale(0.98);
+}
+
+/* Stagger Animation for Cards */
+.result-item {
+  animation: slideInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.result-item:nth-child(1) { animation-delay: 0.1s; }
+.result-item:nth-child(2) { animation-delay: 0.2s; }
+.result-item:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes slideInUp {
   to {
-    transform: rotate(360deg);
+    opacity: 1;
+    transform: translateY(0);
   }
+}
+
+/* Page Transition Animation */
+.glass-card {
+  animation: fadeInScale 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  opacity: 0;
+  transform: scale(0.95) translateY(20px);
+}
+
+@keyframes fadeInScale {
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Enhanced Loading Animation */
+.loading-spinner {
+  position: relative;
+}
+
+.loading-spinner::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  border: 3px solid transparent;
+  border-top: 3px solid var(--color-secondary);
+  border-radius: 50%;
+  animation: spin 2s linear infinite reverse;
+}
+
+/* Pulse Animation for Status Cards */
+.status-success {
+  animation: successPulse 2s ease-in-out infinite;
+}
+
+.status-error {
+  animation: errorPulse 2s ease-in-out infinite;
+}
+
+@keyframes successPulse {
+  0%, 100% { 
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4);
+  }
+  50% { 
+    box-shadow: 0 0 0 10px rgba(34, 197, 94, 0);
+  }
+}
+
+@keyframes errorPulse {
+  0%, 100% { 
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4);
+  }
+  50% { 
+    box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
+  }
+}
+
+/* Parallax Effect for Background Orbs */
+@media (min-width: 768px) {
+  .floating-orb {
+    animation-duration: 25s;
+  }
+  
+  .orb-1 {
+    animation-delay: 0s;
+    animation-direction: normal;
+  }
+  
+  .orb-2 {
+    animation-delay: -8s;
+    animation-direction: reverse;
+  }
+  
+  .orb-3 {
+    animation-delay: -16s;
+    animation-direction: alternate;
+  }
+}
+
+/* Enhanced Mobile Responsiveness */
+@media (max-width: 640px) {
+  .glass-card {
+    margin: 0.5rem;
+    padding: 2rem 1.5rem !important;
+    border-radius: 20px;
+  }
+  
+  .title-primary {
+    font-size: 2.25rem;
+    line-height: 1.1;
+  }
+  
+  .subtitle {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .btn-modern {
+    padding: 1rem 1.5rem;
+    font-size: 0.95rem;
+    min-width: 60px; /* Adjusted for icon-only */
+  }
+  
+  .result-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .result-item {
+    padding: 1.25rem;
+  }
+  
+  .status-card {
+    padding: 1.5rem 1rem;
+  }
+  
+  /* Stack buttons vertically on very small screens */
+  .button-group {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .button-group .btn-modern {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* RTL-specific adjustments for lists and instructions */
+ul, ol {
+  padding-right: 1.5rem; /* Indent from right in RTL */
+  text-align: right;
+}
+
+li {
+  margin-bottom: 0.5rem;
+  text-align: right;
+}
+
+/* Ensure instructions and suggestions are RTL-friendly */
+.instructions, .suggestions {
+  text-align: right;
+  direction: rtl;
+}
+
+/* Final cleanup for organization */
+html, body {
+  overflow-x: hidden; /* Prevent horizontal scroll in RTL */
 }

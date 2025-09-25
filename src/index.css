@@ -1,3 +1,5 @@
+/* You can keep this as is, or remove it if App.css covers all base styles.
+   I've kept it for now, assuming it might have other project-specific resets. */
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
