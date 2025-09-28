@@ -1,5 +1,4 @@
 import React, { createContext, useState, useEffect } from 'react';
-import * as XLSX from 'xlsx';
 
 export const DataContext = createContext();
 
@@ -8,40 +7,34 @@ export function DataProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function loadExcel() {
+    async function loadGoogleSheet() {
       try {
-        const res = await fetch('/data.xlsx');
-        const arrayBuffer = await res.arrayBuffer();
-        const workbook = XLSX.read(arrayBuffer, { type: 'array' });
-        const sheetName = workbook.SheetNames[0];
-        const worksheet = workbook.Sheets[sheetName];
-        const json = XLSX.utils.sheet_to_json(worksheet, { defval: '' });
+        const sheetURL =
+          "https://docs.google.com/spreadsheets/d/1KBdPDI4BvCFw1gWW4_4c2uX4c7ax8SMQgQ5rBzlcjdA/gviz/tq?tqx=out:json";
 
-        // Normalize keys: make sure we have id, name, result fields (case-insensitive)
-        const normalized = json.map((r) => {
-          const keys = Object.keys(r);
-          const obj = {};
-          keys.forEach(k => {
-            const lk = k.trim().toLowerCase();
-            if (lk === 'id') obj.id = String(r[k]).trim();
-            else if (lk === 'name' || lk === 'الاسم') obj.name = String(r[k]).trim();
-            else if (lk === 'result' || lk === 'score' || lk === 'النتيجة') obj.result = String(r[k]).trim();
-            else obj[k] = r[k];
-          });
-          // fallback if headers were exactly 'ID','Name','Result' already handled; ensure id exists
-          if (!obj.id && r.ID) obj.id = String(r.ID).trim();
-          return obj;
-        });
+        const res = await fetch(sheetURL);
+        const text = await res.text();
 
-        setRows(normalized);
+        // قص JSON من النص
+        const json = JSON.parse(text.substr(47).slice(0, -2));
+
+        // تحويل الصفوف لكائنات
+        const data = json.table.rows.map(row => ({
+          id: row.c[0]?.v || "",     // العمود الأول = ID
+          name: row.c[1]?.v || "",   // العمود الثاني = Name
+          result: row.c[2]?.v || "", // العمود الثالث = 0
+          // العمود الرابع (80) متجاهلينه
+        }));
+
+        setRows(data);
       } catch (err) {
-        console.error('Error loading excel', err);
+        console.error("Error loading Google Sheet", err);
       } finally {
         setLoading(false);
       }
     }
 
-    loadExcel();
+    loadGoogleSheet();
   }, []);
 
   return (
@@ -50,4 +43,3 @@ export function DataProvider({ children }) {
     </DataContext.Provider>
   );
 }
-

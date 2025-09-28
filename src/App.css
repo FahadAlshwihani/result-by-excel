@@ -1,20 +1,18 @@
 /* Enhanced Modern UI/UX with RTL Support and Custom Animated Background */
 
 /* Import Google Fonts */
-/* Import Google Fonts - Add Tajawal for Arabic/RTL support */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Tejwal:wght@300;400;500;600;700;800&family=Tajawal:wght@300;400;500;600;700;800&display=swap');
 
 /* CSS Variables for Color Palette */
 :root {
-  /* Updated Background Gradient to Match Request */
-  --bg-gradient: linear-gradient(270deg, #1e0735, #361047, #0d025f, #33182f);
+  /* Background Gradient */
+  --bg-gradient: linear-gradient(270deg, #1E0735, #361047, #0D025F, #33182F);
   --bg-gradient-animated: var(--bg-gradient); /* For animation */
   
   /* Text Colors */
   --text-primary: #F8FAFC;
-  --text-secondary: #94A3B8;
-  --text-muted: #64748B;
+  --text-secondary: #CBD5E1;
+  --text-muted: #94A3B8;
   
   /* Primary Colors */
   --color-primary: #14B8A6;
@@ -25,6 +23,10 @@
   --color-secondary: #6366F1;
   --color-secondary-hover: #4F46E5;
   --color-secondary-light: rgba(99, 102, 241, 0.1);
+
+  /* Accent Colors */
+  --color-accent-sky: #0EA5E9;
+  --color-accent-purple: #A855F7;
   
   /* Status Colors */
   --color-success: #22C55E;
@@ -57,7 +59,7 @@ html {
 }
 
 body {
-  font-family: 'Tajawal', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif; /* Tajawal primary for Arabic */
+  font-family: 'Tajawal', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   background: var(--bg-gradient-animated);
   background-size: 600% 600%;
   animation: gradientAnimation 20s ease infinite;
@@ -71,8 +73,9 @@ body {
   direction: rtl;
   text-align: right; /* Default alignment for RTL */
 }
-
-
+* {
+     font-family: inherit; /* Inherits from body */
+   }
 /* Custom Keyframes for the Requested Background Animation */
 @keyframes gradientAnimation {
   0% { background-position: 0% 50%; }
@@ -102,7 +105,7 @@ body {
 .orb-1 {
   width: 300px;
   height: 300px;
-  background: radial-gradient(circle, rgba(14, 165, 233, 0.15) 0%, transparent 70%); /* Matches new blue */
+  background: radial-gradient(circle, var(--color-accent-sky) 0%, transparent 70%);
   top: -150px;
   right: -150px;
   animation-delay: 0s;
@@ -111,7 +114,7 @@ body {
 .orb-2 {
   width: 400px;
   height: 400px;
-  background: radial-gradient(circle, rgba(99, 102, 241, 0.12) 0%, transparent 70%); /* Matches indigo */
+  background: radial-gradient(circle, var(--color-secondary) 0%, transparent 70%);
   bottom: -200px;
   left: -200px;
   animation-delay: -7s;
@@ -120,7 +123,7 @@ body {
 .orb-3 {
   width: 250px;
   height: 250px;
-  background: radial-gradient(circle, rgba(20, 184, 166, 0.1) 0%, transparent 70%); /* Matches teal */
+  background: radial-gradient(circle, var(--color-primary) 0%, transparent 70%);
   top: 30%;
   left: 10%;
   animation-delay: -14s;
@@ -142,8 +145,14 @@ body {
 }
 
 /* Main App Container - Centered with RTL Support */
-.App {
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
+}
+
+.App {
+  flex-grow: 1;
   position: relative;
   display: flex;
   align-items: center;
@@ -237,10 +246,24 @@ body {
   text-align: center; /* RTL text centering */
 }
 
+.btn-modern:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-modern:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
 .btn-primary {
   background: linear-gradient(135deg, var(--color-primary), #0891B2);
   color: white;
   box-shadow: var(--shadow-sm);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--color-primary-hover), #0E7490);
 }
 
 .btn-secondary {
@@ -249,11 +272,21 @@ body {
   box-shadow: var(--shadow-sm);
 }
 
+.btn-secondary:hover {
+  background: linear-gradient(135deg, var(--color-secondary-hover), #6D28D9);
+}
+
 .btn-outline {
   background: transparent;
   color: var(--text-primary);
   border: 2px solid var(--card-border);
   backdrop-filter: blur(10px);
+}
+
+.btn-outline:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  box-shadow: 0 0 0 2px rgba(20, 184, 166, 0.1);
 }
 
 /* Enhanced Form Elements - RTL Input Group */
@@ -401,6 +434,11 @@ body {
   max-width: 300px; /* Limits width for better centering */
 }
 
+.result-item:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
 .result-label {
   font-family: 'Tajawal', sans-serif;
   color: var(--text-muted);
@@ -499,492 +537,112 @@ body {
   .App {
     padding: 1rem 0.5rem;
   }
-  
+
   .glass-card {
-    margin: 0 0.5rem;
-    border-radius: 20px;
-    padding: 2rem 1.5rem;
+    padding: 2rem 1rem !important;
   }
-  
+
+  .title-primary {
+    font-size: clamp(1.8rem, 8vw, 3rem);
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
   .btn-modern {
-      font-family: 'Tajawal', sans-serif;
-    padding: 0.875rem 1.5rem;
+    padding: 0.8rem 1.5rem;
     font-size: 0.9rem;
-    min-width: 50px; /* Smaller for mobile */
   }
-  
+
   .form-input {
-    padding: 0.875rem 1.25rem;
+    padding: 0.8rem 1.2rem;
+    font-size: 0.9rem;
   }
-  
+
+  .loading-container {
+    padding: 2rem;
+  }
+
+  .loading-spinner {
+    width: 40px;
+    height: 40px;
+  }
+
+  .loading-text {
+    font-size: 1rem;
+  }
+
   .result-grid {
     grid-template-columns: 1fr;
     gap: 1rem;
-    justify-items: center;
   }
-  
-  .input-group {
-    flex-direction: column;
+
+  .result-item {
+    max-width: 100%;
   }
-  
-  .input-group .form-input {
-    border-radius: 16px 16px 0 0;
-    border-left: 2px solid var(--card-border);
-    border-right: 2px solid var(--card-border);
-    border-bottom: none;
+
+  .result-value {
+    font-size: 1.1rem;
   }
-  
-  .input-group .btn-modern {
-    border-radius: 0 0 16px 16px;
-    border-top: none;
-  }
-  
+
   .alert {
-    flex-direction: column;
-    text-align: center;
-    gap: 0.5rem;
-  }
-  
-  .flex-icon-container {
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-  
-  .result-label {
-    justify-content: center;
-  }
-  
-  .result-label svg {
-    margin-left: 0;
-    margin-right: 0;
+    padding: 1rem;
+    font-size: 0.9rem;
   }
 }
 
 @media (max-width: 480px) {
-  .title-primary {
-    font-size: 2rem;
+  .App {
+    padding: 0.5rem;
   }
-  
+
+  .glass-card {
+    padding: 1.5rem 0.75rem !important;
+  }
+
+  .title-primary {
+    font-size: clamp(1.5rem, 10vw, 2.5rem);
+  }
+
   .subtitle {
+    font-size: 0.9rem;
+  }
+
+  .btn-modern {
+    padding: 0.7rem 1.2rem;
+    font-size: 0.85rem;
+  }
+
+  .form-input {
+    padding: 0.7rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .loading-container {
+    padding: 1.5rem;
+  }
+
+  .loading-spinner {
+    width: 30px;
+    height: 30px;
+  }
+
+  .loading-text {
+    font-size: 0.9rem;
+  }
+
+  .result-label {
+    font-size: 0.8rem;
+  }
+
+  .result-value {
     font-size: 1rem;
   }
-  
-  .glass-card {
-    padding: 1.5rem 1rem;
-    border-radius: 16px;
-  }
-  
-  .btn-modern {
-    padding: 0.75rem 1.25rem;
-    font-size: 0.875rem;
-    min-width: 48px;
-  }
-  
-  .result-item {
-    padding: 1.25rem;
-    max-width: 100%;
-  }
-  
-  .status-card {
-    padding: 1.25rem;
-  }
-  
-  .loading-container {
-    padding: 2rem;
-  }
-  
-  .floating-orb {
-    display: none; /* Hide orbs on small screens for performance */
-  }
-  
-  .button-group {
-    flex-direction: column;
-    width: 100%;
-  }
-  
-  .button-group .btn-modern {
-    width: 100%;
-    justify-content: center;
+
+  .alert {
+    padding: 0.8rem;
+    font-size: 0.8rem;
   }
 }
 
-/* Accessibility */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-  
-  body {
-    animation: none;
-    background: linear-gradient(270deg, #0ea5e9, #6366f1, #14b8a6, #0f172a); /* Static fallback */
-  }
-  
-  .floating-orb {
-    animation: none;
-  }
-}
-
-/* Focus styles for accessibility */
-.btn-modern:focus,
-.form-input:focus {
-  outline: 2px solid var(--color-primary);
-  outline-offset: 2px;
-}
-
-/* High contrast mode support */
-@media (prefers-contrast: high) {
-  :root {
-    --card-border: rgba(148, 163, 184, 0.3);
-    --text-secondary: #CBD5E1;
-  }
-  
-  .glass-card {
-    border-width: 2px;
-  }
-}
-
-/* Print styles */
-@media print {
-  .background-effects,
-  .floating-orb {
-    display: none !important;
-  }
-  
-  body {
-    background: white !important;
-    color: black !important;
-  }
-  
-  .glass-card {
-    background: white !important;
-    color: black !important;
-    box-shadow: none !important;
-    border: 1px solid #ccc !important;
-    backdrop-filter: none !important;
-  }
-  
-  .btn-modern,
-  .loading-container {
-    display: none !important;
-  }
-  
-  .title-primary {
-    color: black !important;
-    -webkit-text-fill-color: black !important;
-    background: none !important;
-  }
-  
-  .result-grid {
-    display: block !important;
-  }
-  
-  .result-item {
-    border: 1px solid #ccc !important;
-    margin-bottom: 1rem !important;
-    page-break-inside: avoid;
-  }
-}
-
-/* Touch-friendly interactions */
-@media (hover: none) and (pointer: coarse) {
-  .btn-modern:active {
-    transform: scale(0.98);
-  }
-  
-  .form-input:active {
-    transform: scale(0.99);
-  }
-}
-
-/* Dark mode preference support */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --glass-bg: rgba(15, 23, 42, 0.8);
-    --card-bg: rgba(30, 41, 59, 0.9);
-  }
-}
-
-/* High contrast mode */
-@media (prefers-contrast: high) {
-  :root {
-    --card-border: rgba(148, 163, 184, 0.5);
-    --text-secondary: #E2E8F0;
-    --text-muted: #CBD5E1;
-  }
-  
-  .glass-card {
-    border-width: 2px;
-  }
-  
-  .btn-modern {
-    border: 2px solid currentColor;
-  }
-}
-
-/* Smooth scrolling for all elements */
-* {
-  scroll-behavior: smooth;
-}
-
-/* Enhanced focus indicators for accessibility */
-.btn-modern:focus-visible,
-.form-input:focus-visible {
-  outline: 3px solid var(--color-primary);
-  outline-offset: 2px;
-}
-
-/* Reduced motion support */
-@media (prefers-reduced-motion: reduce) {
-  .floating-orb,
-  .loading-spinner,
-  .glass-card {
-    animation: none;
-  }
-  
-  .btn-modern,
-  .form-input,
-  .result-item,
-  .status-card {
-    transition: none;
-  }
-}
-
-/* Container max-width utilities - Responsive */
-@media (min-width: 640px) {
-  .container {
-    max-width: 640px;
-  }
-}
-
-@media (min-width: 768px) {
-  .container {
-    max-width: 768px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .container {
-    max-width: 1024px;
-  }
-}
-
-@media (min-width: 1280px) {
-  .container {
-    max-width: 1280px;
-  }
-}
-
-/* Utility classes for button groups */
-.button-group {
-  display: flex;
-  gap: 1rem;
-  justify-content: center; /* Centers buttons */
-  flex-wrap: wrap;
-  align-items: center;
-  width: 100%;
-  margin: 0 auto;
-}
-
-/* Enhanced glassmorphism effect */
-.glass-card {
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  background: rgba(15, 23, 42, 0.75);
-  border: 1px solid rgba(255, 255, 255, 0.125);
-}
-
-/* Gradient text utility */
-.gradient-text {
-  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* Glow effect utility */
-.glow-primary {
-  box-shadow: 0 0 20px rgba(20, 184, 166, 0.3);
-}
-
-.glow-secondary {
-  box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
-}
-
-/* Micro-interactions (subtle, no hover transforms) */
-.btn-modern:active {
-  transform: scale(0.98);
-}
-
-/* Stagger Animation for Cards */
-.result-item {
-  animation: slideInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  opacity: 0;
-  transform: translateY(30px);
-}
-
-.result-item:nth-child(1) { animation-delay: 0.1s; }
-.result-item:nth-child(2) { animation-delay: 0.2s; }
-.result-item:nth-child(3) { animation-delay: 0.3s; }
-
-@keyframes slideInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Page Transition Animation */
-.glass-card {
-  animation: fadeInScale 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  opacity: 0;
-  transform: scale(0.95) translateY(20px);
-}
-
-@keyframes fadeInScale {
-  to {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
-}
-
-/* Enhanced Loading Animation */
-.loading-spinner {
-  position: relative;
-}
-
-.loading-spinner::before {
-  content: '';
-  position: absolute;
-  top: -3px;
-  left: -3px;
-  right: -3px;
-  bottom: -3px;
-  border: 3px solid transparent;
-  border-top: 3px solid var(--color-secondary);
-  border-radius: 50%;
-  animation: spin 2s linear infinite reverse;
-}
-
-/* Pulse Animation for Status Cards */
-.status-success {
-  animation: successPulse 2s ease-in-out infinite;
-}
-
-.status-error {
-  animation: errorPulse 2s ease-in-out infinite;
-}
-
-@keyframes successPulse {
-  0%, 100% { 
-    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4);
-  }
-  50% { 
-    box-shadow: 0 0 0 10px rgba(34, 197, 94, 0);
-  }
-}
-
-@keyframes errorPulse {
-  0%, 100% { 
-    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4);
-  }
-  50% { 
-    box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
-  }
-}
-
-/* Parallax Effect for Background Orbs */
-@media (min-width: 768px) {
-  .floating-orb {
-    animation-duration: 25s;
-  }
-  
-  .orb-1 {
-    animation-delay: 0s;
-    animation-direction: normal;
-  }
-  
-  .orb-2 {
-    animation-delay: -8s;
-    animation-direction: reverse;
-  }
-  
-  .orb-3 {
-    animation-delay: -16s;
-    animation-direction: alternate;
-  }
-}
-
-/* Enhanced Mobile Responsiveness */
-@media (max-width: 640px) {
-  .glass-card {
-    margin: 0.5rem;
-    padding: 2rem 1.5rem !important;
-    border-radius: 20px;
-  }
-  
-  .title-primary {
-    font-size: 2.25rem;
-    line-height: 1.1;
-  }
-  
-  .subtitle {
-    font-size: 1rem;
-    margin-bottom: 1.5rem;
-  }
-  
-  .btn-modern {
-    padding: 1rem 1.5rem;
-    font-size: 0.95rem;
-    min-width: 60px; /* Adjusted for icon-only */
-  }
-  
-  .result-grid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-  
-  .result-item {
-    padding: 1.25rem;
-  }
-  
-  .status-card {
-    padding: 1.5rem 1rem;
-  }
-  
-  /* Stack buttons vertically on very small screens */
-  .button-group {
-    flex-direction: column;
-    width: 100%;
-  }
-  
-  .button-group .btn-modern {
-    width: 100%;
-    justify-content: center;
-  }
-}
-
-/* RTL-specific adjustments for lists and instructions */
-ul, ol {
-  padding-right: 1.5rem; /* Indent from right in RTL */
-  text-align: right;
-}
-
-li {
-  margin-bottom: 0.5rem;
-  text-align: right;
-}
-
-/* Ensure instructions and suggestions are RTL-friendly */
-.instructions, .suggestions {
-  text-align: right;
-  direction: rtl;
-}
-
-/* Final cleanup for organization */
-html, body {
-  overflow-x: hidden; /* Prevent horizontal scroll in RTL */
-}
